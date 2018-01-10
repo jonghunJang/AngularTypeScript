@@ -11,6 +11,8 @@ var platform_browser_1 = require("@angular/platform-browser");
 var platform_browser_dynamic_1 = require("@angular/platform-browser-dynamic");
 var color_directive_1 = require("./custom/color.directive");
 var display_directive_1 = require("./custom/display.directive");
+var ordinal_pipe_1 = require("./custom/ordinal.pipe");
+var calculateLength_pipe_1 = require("./custom/calculateLength.pipe");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.name = 'Ultra Racing';
@@ -36,7 +38,7 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent = __decorate([
         core_1.Component({ selector: 'jhjang-App',
-            template: "<h1>{{name | uppercase}}</h1> \n        <ul myColor=\"\">\n            <li *ngFor=\"let carPart of carParts\">\n                <div ngSwitch=\"{{carPart.inStock}}\">\n                <h2 myColor=\"\">{{carPart.name}}</h2>\n                <p>{{carPart.description}}</p>\n                <p myHidden>Hidden Directive</p>\n                <!--<p *ngIf=\"carPart.inStock > 0\">{{carPart.inStock}} in Stock</p>-->\n                <!--<p *ngIf=\"carPart.inStock === 0\">Out of Stock</p>-->\n                <p *ngSwitchCase=\"0\">Out of Stock.</p>\n                <p *ngSwitchDefault=\"\">{{carPart.inStock}} in Storck.</p>\n                </div>\n            </li>\n        </ul>\n    " })
+            template: "<h1>{{name | uppercase}}</h1> \n        <ul myColor=\"\">\n            <li *ngFor=\"let carPart of carParts; let i=index\">\n                <div [ngSwitch]=\"carPart.inStock\">\n                <h2 myColor>{{i+1 | ordinal}}. {{carPart.name}}</h2>\n                <p>{{carPart.description | calculateLength}}</p>\n                <p myHidden>Hidden Directive</p>\n                 <p>{{carPart.price | currency:'EUR':true}}</p>\n                <!--<p *ngIf=\"carPart.inStock > 0\">{{carPart.inStock}} in Stock</p>-->\n                <!--<p *ngIf=\"carPart.inStock === 0\">Out of Stock</p>-->\n                <p *ngSwitchCase=\"0\">Out of Stock.</p>\n                <p *ngSwitchDefault=\"\">{{carPart.inStock| calculateLength}} in Storck.</p>\n                </div>\n            </li>\n        </ul>\n    " })
     ], AppComponent);
     return AppComponent;
 }());
@@ -45,7 +47,7 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            declarations: [AppComponent, color_directive_1.MyColorDirective, display_directive_1.MyDisplayDirective],
+            declarations: [AppComponent, color_directive_1.MyColorDirective, display_directive_1.MyDisplayDirective, ordinal_pipe_1.OrdinalPipe, calculateLength_pipe_1.CalculateLengthPipe],
             imports: [platform_browser_1.BrowserModule],
             bootstrap: [AppComponent]
         })

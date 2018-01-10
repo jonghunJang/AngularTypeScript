@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Truck_1 = require("./Truck");
 var myTruck = new Truck_1.Truck("내트럭", 4);
 myTruck.setSpeed(100);

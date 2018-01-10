@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var HappyCar = /** @class */ (function () {
     //생성자 (new Car("해피카",4))
     function HappyCar(carName, numTier) {
