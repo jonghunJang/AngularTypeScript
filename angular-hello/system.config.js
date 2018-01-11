@@ -25,7 +25,8 @@
         'platform-browser-dynamic',
         'router',
         'router-deprecated',
-        'upgrade'
+        'upgrade',
+        'forms'
     ];
     // Add package entries for angular packages
     ngPackageNames.forEach(function(pkgName) {

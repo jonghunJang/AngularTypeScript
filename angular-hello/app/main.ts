@@ -5,52 +5,22 @@ import {MyColorDirective} from "./custom/color.directive";
 import {MyDisplayDirective} from "./custom/display.directive";
 import {OrdinalPipe} from "./custom/ordinal.pipe";
 import {CalculateLengthPipe} from "./custom/calculateLength.pipe";
-
-@Component(
-    {selector : 'jhjang-App',
-    template:`<h1>{{name | uppercase}}</h1> 
-        <ul myColor="">
-            <li *ngFor="let carPart of carParts; let i=index">
-                <div [ngSwitch]="carPart.inStock">
-                <h2 myColor>{{i+1 | ordinal}}. {{carPart.name}}</h2>
-                <p>{{carPart.description | calculateLength}}</p>
-                <p myHidden>Hidden Directive</p>
-                 <p>{{carPart.price | currency:'EUR':true}}</p>
-                <!--<p *ngIf="carPart.inStock > 0">{{carPart.inStock}} in Stock</p>-->
-                <!--<p *ngIf="carPart.inStock === 0">Out of Stock</p>-->
-                <p *ngSwitchCase="0">Out of Stock.</p>
-                <p *ngSwitchDefault="">{{carPart.inStock| calculateLength}} in Storck.</p>
-                </div>
-            </li>
-        </ul>
-    `})
-class AppComponent{
-    name:string='Ultra Racing';
-    carParts =[{
-        "id":1,
-        "name":"Super Tires",
-        "description":"These tires are the very best.",
-        "inStock":5,
-        "price":4.99
-    },{
-        "id":2,
-        "name":"Reinforced Shocks",
-        "description":"Shocks made from kryptonite.",
-        "inStock":4,
-        "price":9.99
-    },{
-        "id":3,
-        "name":"Padded Seats",
-        "description":"Super soft seats for a smooth ride.",
-        "inStock":0,
-        "price":24.99
-    }]
-}
+import {StockPipe} from "./custom/stock.pipe";
+import {AppComponent} from "./components/myapp/app.component";
+import {CarPartsComponent} from "./components/car-parts/car-parts.component";
+import {FormsModule} from "@angular/forms";
+import {RacingDataService} from "./services/racing-data.service";
+// import {HttpClientModule} from "@angular/common/http";
+import {HttpModule} from "@angular/http";
+import {AboutComponent} from "./components/about/about.component";
+import {APP_ROUTING_MODULE} from "./routes/app.routes";
 
 @NgModule({
-    declarations : [AppComponent, MyColorDirective, MyDisplayDirective, OrdinalPipe,CalculateLengthPipe],
-    imports:[BrowserModule],
-    bootstrap:[AppComponent]
+    declarations : [AppComponent, MyColorDirective, MyDisplayDirective, OrdinalPipe,CalculateLengthPipe,StockPipe,CarPartsComponent
+    ,AboutComponent],
+    imports:[BrowserModule,FormsModule,HttpModule,APP_ROUTING_MODULE],
+    bootstrap:[AppComponent],
+    providers:[RacingDataService]
 })
 class AppModule{
 }
